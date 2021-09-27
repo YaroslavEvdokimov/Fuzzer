@@ -3,22 +3,32 @@
 #include <fstream>
 #include <cstdio>
 #include <csignal>
+#include <string>
+#include <vector>
+#include <windows.h>
+
+
 class Generation
 {
 private:
     char* PathIN;
     char* PathOUT;
-    FILE* File;
-    
-
+    std::ofstream File;
+    std::wstring TMPPath;
 public:
     Generation() {};
 
-    void Gen_File();
+    void GenFile();
 
-    void set_Path(char*, char*);
+    std::wstring TestFile(int);
 
-    void Gen_text_file();
+    std::wstring ModFile(std::wstring);
+
+    char* BitSwap(char *, int);
+
+    void SetPath(char*, char*);
+
+    void GenTextFile();
    
     ~Generation() { remove(PathIN); };
 };

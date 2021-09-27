@@ -1,48 +1,112 @@
 #include "Generation_start.h"
 
-void Generation::Gen_File() {
-    File = fopen(PathIN, "w");
+void Generation::GenFile() {
+    File.open(PathIN, std::ios::binary);
 }
+void Generation::GenTextFile() {
+    int lenght_word;
+    int lenght_sentence;
+    int sentence = 0;
+    std::string text;
+    char tmp;
 
-void Generation::Gen_text_file() {
-
-    int Lenght_Word;
-    int Lenght_Sentence;
-    int Sentence = 0;
-    char text;
-    char* tmp = &text;
-
-    if (File == NULL) {
-        std::cout << "File not found!" << std::endl;
+    if (!File.is_open()) {
+        std::cout << "Cant create a file!" << std::endl;
     }
-
     for (int i = 0; i < 15; ++i) {
-        Lenght_Sentence = rand() % 8 + 1;
+        lenght_sentence = rand() % 8 + 1;
 
-        for (int SentenceLong = 0; SentenceLong < Lenght_Sentence; ++SentenceLong) {
+        for (int sentence_long = 0; sentence_long < lenght_sentence; ++sentence_long) {
+            lenght_word = rand() % 14 + 1;
 
-            Lenght_Word = rand() % 14 + 1;
-
-            for (int j = 0; j < Lenght_Word; ++j) {
+            for (int j = 0; j < lenght_word; ++j) {
                 text = (char)(rand() % 20 + 97);
 
-                if (Sentence == 0) {
-                    text = (char)toupper(text);
-                    fprintf(File, "%c", *tmp);
-                    Sentence++;
+                if (sentence == 0) {
+                    tmp = text[j];
+                    File.write((char*)&text, sizeof(text));
+                    sentence++;
                 }
-                else fprintf(File, "%c", *tmp);
-
+                else  File.write((char*)&text, sizeof(text));
             }
-            if (Lenght_Sentence != SentenceLong + 1) fputc(' ', File);
+            if (lenght_sentence != sentence_long + 1) {
+                text = ' ';
+                File.write((char*)&text, sizeof(text));
+            }
         }
-        Sentence = 0;
-       fputs(". \n", File);
-
+        sentence = 0;
+        text = ". ";
+        File.write((char*)&text, sizeof(text));
     }
-    fclose(File);
+    File.close();
 }
-    void Generation::set_Path(char *IN , char *OUT) {
-        PathIN = IN;
-        PathOUT = OUT;
+
+std::wstring Generation::TestFile(int num_file) {
+    int counter = num_file;
+    int number = 0;
+    std::wstring file_name;
+    std::wstring file_tmp;
+    WIN32_FIND_DATA find_file_data;
+    HANDLE hf;
+    hf = FindFirstFile(L"..\\TestFile\\*.prc", &find_file_data);
+    if (hf != INVALID_HANDLE_VALUE) {
+        do {
+            ++number;
+            if (counter == number) {
+                file_name = find_file_data.cFileName;
+                FindClose(hf);
+                file_tmp = ModFile(file_name);
+                return file_tmp;
+            }
+        } while (FindNextFile(hf, &find_file_data) != 0);
+        FindClose(hf);
+    }
+    file_tmp = L"1";
+    return file_tmp;
+}
+
+std::wstring Generation::ModFile(std::wstring file_name) {
+    std::wstring path_file = L"..\\TestFile\\" + file_name;
+    std::ifstream file_test(path_file, std::ios_base::binary | std::ios::in);
+    if (!file_test.is_open()) {
+        std::cout << "Unable to open file!" << std::endl;
+    }
+
+    std::wstring path_tmp_file = L"..\\TestFile\\tmp_file.prc";
+    std::ofstream file_tmp(path_tmp_file, std::ios_base::binary | std::ios::out);
+    if (!file_tmp.is_open()) {
+        std::cout << "Unable to open file!" << std::endl;
+    }
+    
+    file_test.seekg(0, file_test.end);
+    int length = file_test.tellg();
+    file_test.seekg(0, file_test.beg);
+    char* buffer = new char[length];
+
+    while (file_test.getline(buffer,length, '\0')) {
+        file_test.read(buffer, length);
+        buffer = BitSwap(buffer, length);
+        file_tmp.write(buffer, length); 
+    }
+    file_tmp.close();
+    file_test.close();
+    delete[] buffer;
+    return path_tmp_file;
+}
+
+char* Generation::BitSwap(char* buffer, int length) {
+    char tmp_symbol;
+    int it = rand() % 16 + 1;
+    for (int i = 0; i < it; ++i) {
+        int bit_one = rand() % length + 1;
+        int bit_two = rand() % length + 1;
+        tmp_symbol = buffer[bit_one];
+        buffer[bit_one] = buffer[bit_two];
+        buffer[bit_two] = tmp_symbol;
+    }
+    return buffer;
+}
+    void Generation::SetPath(char *in , char *out) {
+        PathIN = in;
+        PathOUT = out;
 }

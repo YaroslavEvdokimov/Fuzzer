@@ -1,43 +1,35 @@
 #include "Create_Log_File.h"
 
+int CreateLogFile::LogFile(){
+    char name_file[] = "..//GenerationTestFile//test.prc";
+    char name_log_file[] = "..//LogFile//Log_File.prc";
 
-int Create_Log_File::Log_File()
-{
+    std::string file_name = "LogFile" + std::to_string(++Counter) + ".prc";
+    std::string path_file = "..//LogFile//";
 
-    char Name_File[] = "C:\\Users\\79996\\Desktop\\Converted\\test.prc";
-    char Name_Log_File[] = "C:\\Users\\79996\\Desktop\\Converted\\Log_File.prc";
-
-    std::string filename = "Log_file" + std::to_string(++counter) + ".prc";
-    std::string PathFile = "C:\\Users\\79996\\Desktop\\Converted\\";
-
-   
     while(true){
-        std::string filename = "Log_file" + std::to_string(++counter) + ".prc";
-        std::string tmp = PathFile + filename;
-        const char* New_File = tmp.c_str();
-        if (CheckLogFile(Name_Log_File) == false) {
-           rename(Name_File, Name_Log_File);
+        std::string file_name = "Logfile" + std::to_string(++Counter) + ".prc";
+        std::string tmp = path_file + file_name;
+        const char* new_file = tmp.c_str();
+        if (CheckCreateFile(name_log_file) == false) {
+           rename(name_file, name_log_file);
            return 0;
-         }
-        else if (CheckLogFile(New_File) == false) {
-           
-           rename(Name_File, New_File);
+        }
+        else if (CheckCreateFile(new_file) == false) {
+           rename(name_file, new_file);
            return 0;
-         }
+        }
     }
-   // MessageBoxA(NULL, "File error", "Fuzzer", NULL);
 }
 
-bool Create_Log_File::CheckLogFile(const char *Path_Log) {
-    std::ifstream LogFile;
-    LogFile.open(Path_Log);
-    if (!LogFile) {
+bool CreateLogFile::CheckCreateFile(const char *path_log) {
+    std::ifstream log_file;
+    log_file.open(path_log);
+    if (!log_file) {
         return false;
     }
     else {
-        LogFile.close();
+        log_file.close();
         return true;
     }
-
-      
 }

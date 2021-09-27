@@ -5,20 +5,19 @@
 #include <conio.h>
 #include "Generation_start.h"
 #include "Create_Log_File.h"
-#include <processthreadsapi.h>
-#include <winbase.h>
 
 class Fuzzer {
 private:
    char *PathIN;
    char *PathOUT;
+   char PathTestFile;
 public:
-    Fuzzer(char *PathIN, char *PathOUT) {
-        this->PathIN = PathIN;
-        this->PathOUT = PathOUT;
+    Fuzzer(char *in, char *out) {
+       PathIN = in;
+       PathOUT = out;
     }
-    void Start_Fuzzer();
+    void StartFuzzer(int);
    
-    void Del_File_Converter() { remove("C:\\Users\\79996\\Desktop\\Converted\\test2.doc"); }
+    void DelFileConverter() { remove("C:\\Users\\79996\\Desktop\\Converted\\test2.doc"); }
 };
 

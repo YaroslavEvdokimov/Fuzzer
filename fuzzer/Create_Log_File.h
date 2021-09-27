@@ -2,16 +2,15 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-//#include <WinUser.h>
-class Create_Log_File
-{
-private:
-    int counter = 0;
-public:
-    Create_Log_File() {};
 
-    int Log_File();
+class CreateLogFile{
+private:
+    int Counter = 0;
+public:
+    CreateLogFile() {};
+
+    int LogFile();
   
-    bool CheckLogFile(const char* Path_Log);
+    bool CheckCreateFile(const char* path_log);
 };
 
