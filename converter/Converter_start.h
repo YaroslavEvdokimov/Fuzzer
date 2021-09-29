@@ -5,8 +5,8 @@
 
 class Converter {
 private:
-    std::string Path_entrance;
-    std::string Path_output;
+    std::string PathEntrance;
+    std::string PathOutput;
 public:
     Converter(std::string path_entrance, std::string path_output);
 
