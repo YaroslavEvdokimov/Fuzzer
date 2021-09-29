@@ -8,7 +8,7 @@ private:
     std::string Path_entrance;
     std::string Path_output;
 public:
-    Converter(std::string Path_entrance, std::string Path_output);
+    Converter(std::string path_entrance, std::string path_output);
 
     std::ifstream::pos_type FileSize(const char*);
      
