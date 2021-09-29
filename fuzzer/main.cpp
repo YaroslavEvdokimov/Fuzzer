@@ -10,28 +10,22 @@ void CatchingSignals(int signum){
     signal(signum, SIG_DFL);
 }
 
-int main(){
-    setlocale(LC_ALL, "Ru");
+int main(int argc, char* argv[]){
     srand(time(NULL));
     signal(SIGABRT, CatchingSignals);
     signal(SIGSEGV, CatchingSignals);
     signal(SIGTERM, CatchingSignals);
 
-    int code_operation = 2;
+    int code_operation = std::atoi(argv[3].c_str());
     std::cout << "Enter code operation: \n 1 - Generation new file \n 2 - Take a test file" << std::endl;
-    std::cin >> code_operation;
 
     while (code_operation == 1 || code_operation == 2){
        if (code_operation == 1){
-          char path_in[] = "..\\GenerationTestFile\\test.prc";
-          char path_out[] = "..\\GenerationTestFile\\test2.doc";
-          Fuzzer fuzzer(path_in, path_out);
+          Fuzzer fuzzer(argv[1], argv[2]);
           fuzzer.StartFuzzer(1);
        }
        else if (code_operation == 2) {
-          char path_in[] = "..\\TestFile\\test.prc";
-          char path_out[] = "..\\GenerationTestFile\\test2.doc";
-          Fuzzer fuzzer(path_in, path_out);
+          Fuzzer fuzzer(argv[1], argv[2]);
           fuzzer.StartFuzzer(2);
        }
        else {
