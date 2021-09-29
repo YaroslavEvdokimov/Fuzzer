@@ -1,36 +1,33 @@
 #include "Converter_start.h"
 
-Converter::Converter(std::string Path_entrance, std::string Path_output) {
-    this->Path_entrance = Path_entrance;
-    this->Path_output = Path_output;
+Converter::Converter(std::string path_entrance, std::string path_output) {
+    this->PathEntrance = path_entrance;
+    this->PathOutput = path_output;
 }
-std::ifstream::pos_type Converter::filesize(const char* filename){
-    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+std::ifstream::pos_type Converter::FileSize(const char* file_name){
+    std::ifstream in(file_name, std::ifstream::ate | std::ifstream::binary);
     return in.tellg();
 }
 
-void Converter::Start_Converter() {
-    std::ifstream File_Entrance(Path_entrance, std::ios_base::binary | std::ios_base::in);
-    if (!File_Entrance.good()){
+void Converter::StartConverter() {
+    std::ifstream file_entrance(PathEntrance, std::ios_base::binary | std::ios_base::in);
+    if (!file_entrance.good()){
         std::cerr << "Error input file";
         raise(SIGABRT);
     }
-    std::ofstream File_Output(Path_output, std::ios_base::binary | std::ios_base::out);
-    if (!File_Output.is_open()) {
+    std::ofstream file_output(PathOutput, std::ios_base::binary | std::ios_base::out);
+    if (!file_output.is_open()) {
         std::cerr << "Error output file";
         raise(SIGABRT);
     }
-   
     char buffer;
-
-       while(File_Entrance.read(&buffer, sizeof(char))){
-        
-        File_Output << buffer;
+    while(file_entrance.read(&buffer, sizeof(char))){
+        file_output << buffer;
         if (buffer = 'r') {
             raise(SIGABRT);
         }
     }
-        File_Output.close();
+    file_output.close();
 }
 
 
