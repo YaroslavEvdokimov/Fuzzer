@@ -1,9 +1,11 @@
 ﻿#include <iostream>
 #include "Converter_start.h"
 
-int main(int argc, char* argv[]){
-	setlocale(LC_ALL, "Ru");
+int main(int argc, char* argv[])
+{
+	
 	Converter con(argv[1], argv[2]);
+	//Converter con("C:\\Users\\79996\\Desktop\\Converted\\test.prc", "C:\\Users\\79996\\Desktop\\Converted\\test2.doc");
 	con.StartConverter();
 	return 0;
 }
