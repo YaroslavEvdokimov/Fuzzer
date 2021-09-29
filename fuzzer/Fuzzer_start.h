@@ -18,6 +18,6 @@ public:
     }
     void StartFuzzer(int);
    
-    void DelFileConverter() { remove("C:\\Users\\79996\\Desktop\\Converted\\test2.doc"); }
+    void DelFileConverter() { remove("..\\Converter\\ConvertFile\\test2.doc"); }
 };
 

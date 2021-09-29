@@ -9,7 +9,7 @@ void Fuzzer::StartFuzzer(int code_operation){
     while (true){
         STARTUPINFO process = {0};
         PROCESS_INFORMATION pr = {0};
-        std::wstring path (L"C:\\Users\\79996\\source\\repos\\Convector\\Debug\\Convector.exe");
+        std::wstring path (L"..\\Convector\\Debug\\Convector.exe");
         LPWSTR path_exe = &path[0];
         LPWSTR arguments_convector = 0;
         DWORD process_code;
@@ -17,7 +17,7 @@ void Fuzzer::StartFuzzer(int code_operation){
         if (code == 1){
            gen.GenFile();
            gen.GenTextFile();
-           std::wstring arguments(L"Convector.exe ..\\GenerationTestFile\\test.prc ..\\GenerationTestFile\\test2.doñ");
+           std::wstring arguments(L"Convector.exe ..\\GenerationTestFile\\test.prc ..\\GenerationTestFile\\test2.doc");
            LPWSTR arguments_convector = &arguments[0];
         }
         else if(code == 2) {
@@ -26,7 +26,7 @@ void Fuzzer::StartFuzzer(int code_operation){
            }
            std::wstring name_file = gen.TestFile(++tmp_test_file);
            std::wstring name_exe(L"Convector.exe ");
-           std::wstring name_path_out(L" ..\\GenerationTestFile\\test2.doñ");
+           std::wstring name_path_out(L" ..\\GenerationTestFile\\test2.doc");
            std::wstring arguments = name_exe + name_file + name_path_out;
            LPWSTR arguments_convector = &arguments[0];
         }

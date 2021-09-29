@@ -3,8 +3,6 @@
 int CreateLogFile::LogFile(){
     char name_file[] = "..//GenerationTestFile//test.prc";
     char name_log_file[] = "..//LogFile//Log_File.prc";
-
-    std::string file_name = "LogFile" + std::to_string(++Counter) + ".prc";
     std::string path_file = "..//LogFile//";
 
     while(true){

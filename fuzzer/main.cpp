@@ -6,7 +6,7 @@
 #include "Fuzzer_start.h"
 
 void CatchingSignals(int signum){
-    remove("C:\\Users\\79996\\Desktop\\Converted\\test.prc");
+    remove("..\\GenerationTestFile\\test.prc");
     signal(signum, SIG_DFL);
 }
 
