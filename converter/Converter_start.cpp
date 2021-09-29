@@ -4,8 +4,8 @@ Converter::Converter(std::string path_entrance, std::string path_output) {
     this->PathEntrance = path_entrance;
     this->PathOutput = path_output;
 }
-std::ifstream::pos_type Converter::FileSize(const char* filename){
-    std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+std::ifstream::pos_type Converter::FileSize(const char* file_name){
+    std::ifstream in(file_name, std::ifstream::ate | std::ifstream::binary);
     return in.tellg();
 }
 void Converter::StartConverter() {
