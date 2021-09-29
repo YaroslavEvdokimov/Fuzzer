@@ -23,11 +23,11 @@ public:
 
     std::wstring ModFile(std::wstring);
 
-    char* BitSwap(char *, int);
+    char* BitSwap(char*);
 
     void SetPath(char*, char*);
 
     void GenTextFile();
-   
+
     ~Generation() { remove(PathIN); };
 };

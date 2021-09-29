@@ -77,16 +77,20 @@ std::wstring Generation::ModFile(std::wstring file_name) {
     if (!file_tmp.is_open()) {
         std::cout << "Unable to open file!" << std::endl;
     }
-    
+
     file_test.seekg(0, file_test.end);
     int length = file_test.tellg();
+    if (length == 0) {
+      return path_tmp_file;
+    }
+    
     file_test.seekg(0, file_test.beg);
     char* buffer = new char[length];
 
-    while (file_test.getline(buffer,length, '\0')) {
+    while (file_test.getline(buffer, length, '\0')) {
         file_test.read(buffer, length);
-        buffer = BitSwap(buffer, length);
-        file_tmp.write(buffer, length); 
+        buffer = BitSwap(buffer);
+        file_tmp.write(buffer, length);
     }
     file_tmp.close();
     file_test.close();
@@ -94,19 +98,20 @@ std::wstring Generation::ModFile(std::wstring file_name) {
     return path_tmp_file;
 }
 
-char* Generation::BitSwap(char* buffer, int length) {
+char * Generation::BitSwap(char *buffer) {
     char tmp_symbol;
-    int it = rand() % 16 + 1;
+
+    int it = rand() % 5 + 1;
     for (int i = 0; i < it; ++i) {
-        int bit_one = rand() % length + 1;
-        int bit_two = rand() % length + 1;
+        int bit_one = rand() % 15 + 1;
+        int bit_two = rand() % 15 + 1;
         tmp_symbol = buffer[bit_one];
         buffer[bit_one] = buffer[bit_two];
         buffer[bit_two] = tmp_symbol;
     }
     return buffer;
 }
-    void Generation::SetPath(char *in , char *out) {
-        PathIN = in;
-        PathOUT = out;
+void Generation::SetPath(char* in, char* out) {
+    PathIN = in;
+    PathOUT = out;
 }
