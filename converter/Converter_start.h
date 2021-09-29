@@ -5,14 +5,19 @@
 
 class Converter {
 private:
-    std::string PathEntrance;
-    std::string PathOutput;
-public:
-    Converter(std::string, std::string);
 
-    std::ifstream::pos_type FileSize(const char*);
+    std::string Path_entrance;
+    std::string Path_output;
+public:
+
+    Converter(std::string Path_entrance, std::string Path_output);
+
+    std::ifstream::pos_type filesize(const char* filename);
      
-    void StartConverter();
+    void Start_Converter();
+
+   
+
 };
 
 
