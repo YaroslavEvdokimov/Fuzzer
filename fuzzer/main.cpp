@@ -6,14 +6,17 @@ void CatchingSignals(int signum) {
     remove("..\\GenerationTestFile\\test.prc");
     signal(signum, SIG_DFL);
 }
+
 int main(int argc, char* argv[]) {
     srand(time(NULL));
     signal(SIGABRT, CatchingSignals);
     signal(SIGSEGV, CatchingSignals);
     signal(SIGTERM, CatchingSignals);
+
     CreateDirectory(L"..\\GenerationTestFile",NULL);
     CreateDirectory(L"..\\LogFile", NULL);
     CreateDirectory(L"..\\TestFile", NULL);
+
     int code_operation = std::atoi(argv[3]);
     while (code_operation == 1 || code_operation == 2) {
         if (code_operation == 1) {

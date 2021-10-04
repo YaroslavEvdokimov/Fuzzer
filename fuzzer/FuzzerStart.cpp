@@ -35,7 +35,7 @@ void Fuzzer::ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file){
     STARTUPINFO process = { 0 };
     PROCESS_INFORMATION pr = { 0 }; 
     DWORD process_code;
-    std::wstring path(L"..\\Convector\\Debug\\Convector.exe");
+    std::wstring path(L"..\\Convector.exe"); 
     LPWSTR path_exe = &path[0];
     if (CreateProcess(path_exe, arguments_convector, NULL, NULL, FALSE, NULL, NULL, NULL, &process, &pr) == TRUE) {
         WaitForSingleObject(pr.hProcess, INFINITE);
@@ -46,11 +46,11 @@ void Fuzzer::ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file){
                 NewLogFile.LogFile(name_file);
             }
         }
-    }
-    else {
+    }else{
         std::cout << "Error: " + GetLastError() << std::endl;
         system("pause");
         return;
     }
+
     DelFileConverter();
  }

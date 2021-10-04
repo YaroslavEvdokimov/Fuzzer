@@ -17,5 +17,8 @@ public:
 
     void ArgumentsCMD(LPWSTR, std::wstring);
 
-    void DelFileConverter() { remove("..\\Converter\\ConvertFile\\test2.doc"); }
+    void DelFileConverter() { 
+        remove("..\\Converter\\ConvertFile\\test2.doc");
+        remove("..\\TestFile\\tmp_file.prc");
+    }
 };

@@ -14,6 +14,7 @@ private:
     char* PathOUT;
     std::ofstream File;
     std::wstring TMPPath;
+    std::vector<char> buffer;
 public:
     Generation() {};
 
@@ -23,7 +24,7 @@ public:
 
     std::wstring ModFile(std::wstring);
 
-    char* BitSwap(char*);
+    void BitSwap(std::vector<char>& buffer);
 
     void SetPath(char*, char*);
 
