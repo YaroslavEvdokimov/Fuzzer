@@ -2,11 +2,13 @@
 #include <iostream>
 #include <fstream>
 #include <csignal>
+#include <vector>
 
 class Converter {
 private:
     std::string PathEntrance;
     std::string PathOutput;
+    std::vector<char> BinaryText;
 public:
     Converter(std::string path_entrance, std::string path_output);
 

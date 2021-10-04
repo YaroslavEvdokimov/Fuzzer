@@ -20,16 +20,19 @@ void Converter::StartConverter() {
         std::cerr << "Error output file";
         raise(SIGABRT);
     }
-    char buffer;
+    std::uint8_t buffer;
     while (!file_entrance.eof()) {
-        //size_t lenght = 0;
-        //file_entrance.read((char*)&lenght, sizeof(lenght));
-        //buffer.resize(lenght);
         file_entrance.read((char*)&buffer, sizeof(buffer));
-        file_output << buffer;
+        BinaryText.push_back(buffer);  
     }
-        file_entrance.close();
-        file_output.close();
+    for (int i = 0; i < BinaryText.size(); ++i) {
+        if (BinaryText[4] == 'R') {
+            raise(SIGABRT);
+        }
+        file_output << BinaryText[i];
+    }
+    file_entrance.close();
+    file_output.close();
 }
 
 
