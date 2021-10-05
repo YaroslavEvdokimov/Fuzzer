@@ -45,6 +45,7 @@ void Fuzzer::ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file){
                 CreateLogFile NewLogFile;
                 NewLogFile.LogFile(name_file);
             }
+            CloseHandle(pr.hProcess);
         }
     }else{
         std::cout << "Error: " + GetLastError() << std::endl;
