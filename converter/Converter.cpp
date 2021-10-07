@@ -30,9 +30,7 @@ void Converter::Start() {
         exit(1);
     }
     std::uint8_t buffer;
-    while (!file_entrance.eof()) {
-        file_entrance.read(reinterpret_cast<char*>(&BinaryData[0]), lenght);
-    }
+    file_entrance.read(reinterpret_cast<char*>(&BinaryData[0]), lenght);
     for (int i = 0; i < BinaryData.size(); ++i) {
         if (BinaryData.size() > 4 || BinaryData[4] == 'R') {
             raise(SIGABRT);
