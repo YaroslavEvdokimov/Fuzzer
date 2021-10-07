@@ -1,6 +1,6 @@
 #include "CreateLogFile.h"
 
-int CreateLogFile::LogFile(std::wstring path_name) {
+int CreateLogFile::LogFile(const std::wstring path_name) {
     std::string tmp(path_name.begin(), path_name.end());
     const char* name_file = tmp.c_str();
     char name_log_file[] = "..//LogFile//Log_File.prc";
