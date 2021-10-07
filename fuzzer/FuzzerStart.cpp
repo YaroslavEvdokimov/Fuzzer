@@ -1,24 +1,24 @@
-#include "FuzzerStart.h"
+#include "Fuzzer.h"
 
-void Fuzzer::StartFuzzer(int code_operation) {
+void Fuzzer::Start(int code_operation) {
     int enter_code = code_operation;
     int tmp_test_file = 0;
-    Generation gen;
-    gen.SetPath(PathIN, PathOUT);
+    Generation generation;
+    generation.SetPath(PathIN, PathOUT);
 
     while (true) {
         LPWSTR arguments_convector = 0;
         if (enter_code == 1) {
-            gen.GenFile();
-            gen.GenTextFile();
+            generation.GenFile();
+            generation.GenBinaryFile();
             std::wstring name_file = L"..\\GenerationTestFile\\test.prc";
             std::wstring arguments(L"Convector.exe ..\\GenerationTestFile\\test.prc ..\\GenerationTestFile\\test2.doc");
             LPWSTR arguments_convector = &arguments[0];
             ArgumentsCMD(arguments_convector, name_file);
         }
         else if (enter_code == 2) {
-            if (gen.TestFile(++tmp_test_file) != L"1") {
-                std::wstring name_file = gen.TestFile(tmp_test_file);
+            if (generation.TestFile(++tmp_test_file) != L"1") {
+                std::wstring name_file = generation.TestFile(tmp_test_file);
                 std::wstring name_exe(L"Convector.exe ");
                 std::wstring name_path_out(L" ..\\GenerationTestFile\\test2.doc");
                 std::wstring arguments = name_exe + name_file + name_path_out;
