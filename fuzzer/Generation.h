@@ -7,8 +7,7 @@
 #include <vector>
 #include <windows.h>
 
-class Generation
-{
+class Generation{
 private:
     char* PathIN;
     char* PathOUT;
