@@ -7,7 +7,7 @@
 #include <vector>
 #include <windows.h>
 
-class Generation{
+class Generation {
 private:
     char* PathIN;
     char* PathOUT;
@@ -25,7 +25,7 @@ public:
 
     void BitSwap(std::vector<char>& buffer);
 
-    void SetPath(const char* in, const char* out);
+    void SetPath(char* in,  char* out);
 
     void GenBinaryFile();
 

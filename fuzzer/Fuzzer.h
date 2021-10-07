@@ -9,14 +9,17 @@ private:
     char* PathOUT;
     char PathTestFile;
 public:
-    Fuzzer(const char* in, const char* out)
-    :PathIN (in), PathOUT(out){}
-    
+    Fuzzer( char* in,  char* out) :PathIN(in), PathOUT(out) {}
+
+    Fuzzer() {}
+
     void Start(const int code_operation);
 
     void ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file);
 
-    void DelFileConverter() { 
+    void InformatioMessage();
+
+    void DelFileConverter() {
         remove("..\\Converter\\ConvertFile\\test2.doc");
         remove("..\\TestFile\\tmp_file.prc");
     }

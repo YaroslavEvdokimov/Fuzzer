@@ -1,6 +1,6 @@
 #include "Fuzzer.h"
 
-void Fuzzer::Start(int code_operation) {
+void Fuzzer::Start(const int code_operation) {
     int enter_code = code_operation;
     int tmp_test_file = 0;
     Generation generation;
@@ -31,11 +31,11 @@ void Fuzzer::Start(int code_operation) {
     }
 }
 
-void Fuzzer::ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file){
+void Fuzzer::ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file) {
     STARTUPINFO process = { 0 };
-    PROCESS_INFORMATION pr = { 0 }; 
+    PROCESS_INFORMATION pr = { 0 };
     DWORD process_code;
-    std::wstring path(L"..\\Convector.exe"); 
+    std::wstring path(L"..\\Convector.exe");
     LPWSTR path_exe = &path[0];
     if (CreateProcess(path_exe, arguments_convector, NULL, NULL, FALSE, NULL, NULL, NULL, &process, &pr) == TRUE) {
         WaitForSingleObject(pr.hProcess, INFINITE);
@@ -47,11 +47,26 @@ void Fuzzer::ArgumentsCMD(LPWSTR arguments_convector, std::wstring name_file){
             }
             CloseHandle(pr.hProcess);
         }
-    }else{
+    }
+    else {
         std::cout << "Error: " + GetLastError() << std::endl;
         system("pause");
         return;
     }
-
     DelFileConverter();
- }
+}
+
+void Fuzzer::InformatioMessage() {
+    std::string tmp_info;
+    std::vector<std::string> v_info;
+    std::ifstream info_file("..\\Information\\ReadMe.txt", std::ios::in);
+    if (info_file.is_open()) {
+        std::copy(std::istream_iterator<std::string>(info_file), std::istream_iterator<std::string>(), std::back_inserter(v_info));
+        for (auto& a : v_info) {
+            tmp_info += a + ' ';
+        }
+        std::wstring wstr(tmp_info.begin(), tmp_info.end());
+        LPCUWSTR str_info = &wstr[0];
+        MessageBox(0, str_info, L"Information massage", MB_OK);
+    }
+}

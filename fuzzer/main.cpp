@@ -8,19 +8,20 @@ void CatchingSignals(int signum) {
 
 int main(int argc, char* argv[]) {
     srand(time(NULL));
-    
-    if (argc < 4){
-        //InformationMessage();
+
+    if (argc < 4) {
+        Fuzzer fuzzer;
+        fuzzer.InformatioMessage();
         exit(1);
     }
     signal(SIGABRT, CatchingSignals);
     signal(SIGSEGV, CatchingSignals);
     signal(SIGTERM, CatchingSignals);
 
-    CreateDirectory(L"..\\GenerationTestFile",NULL);
+    CreateDirectory(L"..\\GenerationTestFile", NULL);
     CreateDirectory(L"..\\LogFile", NULL);
     CreateDirectory(L"..\\TestFile", NULL);
-    
+
     int code_operation = std::atoi(argv[3]);
     while (code_operation == 1 || code_operation == 2) {
         if (code_operation == 1) {

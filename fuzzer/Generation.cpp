@@ -1,7 +1,8 @@
 #include "Generation.h"
 
-void Generation::SetPath(const char* in, const char* out) 
-    : PathIN (in), PathOUT(out){}
+void Generation::SetPath(char* in, char* out) {
+    PathIN = in; PathOUT = out;
+}
 
 void Generation::GenFile() {
     File.open(PathIN, std::ios::binary);
@@ -81,24 +82,24 @@ std::wstring Generation::ModFile(std::wstring file_name) {
         std::cout << "Unable to open file!" << std::endl;
     }
     while (!file_test.eof()) {
-        file_test.read((char *)&tmp, sizeof(char));
+        file_test.read((char*)&tmp, sizeof(char));
         buffer.push_back(tmp);
     }
     BitSwap(buffer);
     for (auto tmp : buffer) {
-        file_tmp.write((char *)&tmp, sizeof(char));
+        file_tmp.write((char*)&tmp, sizeof(char));
     }
     buffer.clear();
     file_tmp.close();
     file_test.close();
     return path_tmp_file;
 }
-    void Generation::BitSwap(std::vector<char> &buffer) {
+void Generation::BitSwap(std::vector<char>& buffer) {
     char tmp_symbol;
     int it = rand() % 5 + 1;
     for (int i = 0; i < it; ++i) {
-        int bit_one = rand() % buffer.size()-1 + 1;
-        int bit_two = rand() % buffer.size()-1 + 1;
+        int bit_one = rand() % buffer.size() - 1 + 1;
+        int bit_two = rand() % buffer.size() - 1 + 1;
         std::swap(buffer[bit_one], buffer[bit_two]);
     }
 }
