@@ -9,7 +9,7 @@ private:
 public:
     CreateLogFile() {};
 
-    int LogFile(std::wstring);
+    int LogFile(const std::wstring path_name);
 
     bool CheckCreateFile(const char* path_log);
 };
