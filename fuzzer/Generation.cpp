@@ -1,9 +1,12 @@
-#include "GenerationStart.h"
+#include "Generation.h"
+
+void Generation::SetPath(const char* in, const char* out) 
+    : PathIN (in), PathOUT(out){}
 
 void Generation::GenFile() {
     File.open(PathIN, std::ios::binary);
 }
-void Generation::GenTextFile() {
+void Generation::GenBinaryFile() {
     int lenght_word;
     int lenght_sentence;
     int sentence = 0;
@@ -98,8 +101,4 @@ std::wstring Generation::ModFile(std::wstring file_name) {
         int bit_two = rand() % buffer.size()-1 + 1;
         std::swap(buffer[bit_one], buffer[bit_two]);
     }
-}
-void Generation::SetPath(char* in, char* out) {
-    PathIN = in;
-    PathOUT = out;
 }
