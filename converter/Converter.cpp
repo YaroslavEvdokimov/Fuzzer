@@ -1,6 +1,6 @@
 #include "Converter.h"
 
-Converter::Converter(const &std::string path_entrance, const &std::string path_output) 
+Converter::Converter(const std::string &path_entrance, const std::string &path_output) 
     : PathEntrance(path_entrance), PathOutput(path_output) {}
 
 Converter::Converter(){}
