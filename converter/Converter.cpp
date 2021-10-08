@@ -1,6 +1,6 @@
 #include "Converter.h"
 
-Converter::Converter(const std::string path_entrance, const std::string path_output) 
+Converter::Converter(const &std::string path_entrance, const &std::string path_output) 
     : PathEntrance(path_entrance), PathOutput(path_output) {}
 
 Converter::Converter(){}
@@ -29,7 +29,6 @@ void Converter::Start() {
         InformatioMessage();
         exit(1);
     }
-    std::uint8_t buffer;
     file_entrance.read(reinterpret_cast<char*>(&BinaryData[0]), lenght);
     for (int i = 0; i < BinaryData.size(); ++i) {
         if (BinaryData.size() > 4 || BinaryData[4] == 'R') {
