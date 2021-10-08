@@ -15,7 +15,7 @@ public:
 
     Converter(const std::string &path_entrance, const std::string &path_output);
 
-    std::ifstream::pos_type GetFileSize(const std::string &file_name);
+    std::ifstream::pos_type GetFileSize(const std::string file_name);
      
     void Start();
 
